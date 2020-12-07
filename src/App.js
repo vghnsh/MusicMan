@@ -1,15 +1,13 @@
 import React ,{useState} from 'react';
-import {Button,Card, Input } from 'antd';
+import {Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import styled from "styled-components";
 import {create} from 'apisauce';
-import dateFormat from 'dateformat';
+import Card1 from './Card1';
 
-function App() {
-  
+function App() { 
   const [input,setInput]= useState();
   const [data,setData] = useState();
-  const { Meta } = Card;
  
   const handleClick = ()=>{
     const apiClient= create({
@@ -43,13 +41,7 @@ function App() {
         <Row>
         {
           data?.data?.results?.filter((d1)=> d1.kind === 'song').map((d1)=>(
-            <Card
-              hoverable
-              style={{ width: 240 ,padding:'1.5em',margin:'1em'}}
-              cover={<img alt="example" src={d1.artworkUrl100}/>}
-              >
-              <Meta title={d1.artistName} description={dateFormat(d1.releaseDate, "mmmm dS, yyyy")}/>
-            </Card>
+            <Card1 key={d1.id} data={d1}/>
           ))    
         } 
         </Row>  

@@ -12,7 +12,6 @@ function App() {
   const handleClick = ()=>{
     const apiClient= create({
       baseURL:'https://itunes.apple.com/search?term=',
-      headers: { Accept: 'application/vnd.github.v3+json' }
     });
     apiClient.get(`${input}`)
     .then((sdata)=>setData(sdata))

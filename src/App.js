@@ -64,7 +64,6 @@ function App() {
 
         <Route path="/Fav">
           <Header/>
-          <Search/>
           <Fav/>
           
         </Route>

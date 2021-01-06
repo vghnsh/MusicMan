@@ -11,9 +11,7 @@ export const initialState = {
     trackId:[]
 };
 
-   
-function reducer(state,action){
-    
+function reducer(state,action){    
     //console.log(action);
     switch(action.type){
 
@@ -78,39 +76,6 @@ function reducer(state,action){
                     user:action.user,
                     isSign:action.isSign
             };
-
-        
-            
-        
-            
-        case "CLEAR_CART":
-            return{
-                ...state,
-                cart:action.cart
-            }
-     
-        
-        
-        case "SET_CATEGORY":
-            let newProduct = state.product;
-            newProduct.filter((pr) =>(
-                pr.category === action.Category
-            ))
-            return{
-                ...state, 
-            }
-        
-        case "PRODUCTS":
-            return{
-                ...state,
-                product:action.product
-            }
-            
-        case "FILTER":
-            return{
-                ...state,
-                filter:action.filter
-            }
           
         default:
             return state;

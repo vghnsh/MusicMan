@@ -26,7 +26,12 @@ function Fav() {
     },[user?.uid]);
     
     return (
-        <FavMain>
+        <Content>
+            
+            <Cent>
+               <b><i> Favourite Page</i></b>
+            </Cent>
+            <FavMain>
             {
                 isSign ? 
 
@@ -38,14 +43,24 @@ function Fav() {
                  
             <Player/>
         </FavMain>  
+        </Content>
+        
     )
 }
 
 export default Fav;
-
+const Content = styled.div`
+    display:flex;
+    flex-direction:column;
+`;
 const FavMain = styled.div`
     display:flex;
     flex-flow: wrap;
     justify-content: center;
-    padding: 1em;`;
+    padding: 1em; 
+    background-color: aliceblue;`;
 
+const Cent = styled.div`
+    display:flex;
+    justify-content:center;
+    background-color: aliceblue;`;

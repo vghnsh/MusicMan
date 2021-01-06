@@ -7,12 +7,12 @@ import Card1 from '../Card/Card1.component';
 import Player from '../Player/Player.component';
 
 function Main() {
-  const [{isLoading,search,user,trackId}]=useStateValue();
+  const [{isLoading,search,user}]=useStateValue();
     const [,dispatch]=useStateValue();
     
   useEffect(()=>{
     const apiClient= create({
-      baseURL:'https://itunes.apple.com/search?term=eminem',
+      baseURL:'https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?term=eminem',
     });
     apiClient.get()
     .then((sdata)=> dispatch({
@@ -20,7 +20,7 @@ function Main() {
         search:sdata
     }))
     .catch((e)=>console.log(e));
-  },[dispatch,user?.uid,trackId]);
+  },[dispatch,user?.uid]);
     return (
     <Maindiv>    
       {

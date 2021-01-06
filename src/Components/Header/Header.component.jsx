@@ -13,8 +13,14 @@ function Header() {
   const history = useHistory();
 
   const handle=()=>{
-    dispatch({type:"SET_CURRENT_MUSIC",currentMusic:null})
-    dispatch({type:'SET_CURRENT_STATE',music:null})
+    if(isSign){
+      dispatch({type:"SET_CURRENT_MUSIC",currentMusic:null})
+      dispatch({type:'SET_CURRENT_STATE',music:null})
+    }
+    else{
+      alert('Please LogIn to use this feature');
+    }
+    
     
   }
 
@@ -36,12 +42,12 @@ function Header() {
               isSign ? 
               <Navb>
                 <NavItem>{user?.displayName}</NavItem>
-                <NavItem><Link onClick={handle} to='/fav'>Your Favorite</Link></NavItem>
+                <NavItem><Link to='/fav' onClick={handle} >Your Favorite</Link></NavItem>
                 <NavItem><Button onClick={signOut} type="primary" danger>Logout</Button></NavItem>
               </Navb>
               :
               <Navb>
-                <NavItem><Link to='/fav' onClick={()=>(dispatch({type:"SET_CURRENT_MUSIC",currentMusic:null}))}>Your Favorite</Link></NavItem>
+                <NavItem><Link onClick={handle}>Your Favorite</Link></NavItem>
                 <NavItem><Button><Link to='/Signin'>LogIn</Link></Button></NavItem>
                 <NavItem><Button danger><Link to='/Signup'>SignUp</Link></Button></NavItem>
               </Navb>

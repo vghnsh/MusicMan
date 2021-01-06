@@ -1,0 +1,36 @@
+.signUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.5em;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5em;
+  }
+  .signDiv {
+    display: flex;
+    flex-direction: column;
+    .GoogleSign {
+      background-color: gainsboro;
+    }
+
+    .signUPBTN {
+      background-color: gainsboro;
+      //text-decoration: none;
+    }
+
+    .signForm {
+      display: flex;
+      flex-direction: column;
+
+      .mail {
+        margin: 0.5em;
+      }
+      .password {
+        margin: 0.5em;
+      }
+    }
+  }
+}

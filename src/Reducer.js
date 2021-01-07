@@ -13,7 +13,8 @@ export const initialState = {
     trackId:[]
 };
 
-function reducer(state,action){    
+function reducer(state,action){ 
+    console.log(action);   
     switch(action.type){
         case "SET_SEARCH":
             return{

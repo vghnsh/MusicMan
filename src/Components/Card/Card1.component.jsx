@@ -22,6 +22,13 @@ function Card1({data}) {
   };
   const addToFav=()=>{
     if(isSign){
+      if(db.collection('users').onSnapshot((snapshot) => 
+        (snapshot.docs.map((doc) =>( doc.uid !== user?.uid)))))
+        {
+            db.collection('users').doc(user?.uid).set({
+                uname: user?.displayName,
+            })
+        }
       db.collection('users').doc(user?.uid).collection('fav').doc().set({
         imageUrl:data.artworkUrl100,
         title:data.collectionName,

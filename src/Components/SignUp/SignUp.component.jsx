@@ -4,16 +4,17 @@ import { useHistory } from "react-router-dom";
 import {auth} from '../../firebase';
 import firebase from 'firebase';
 import './Signup.style.scss';
+
+import {Spin,Space} from 'antd';
 import {useStateValue} from '../../StateProvider';
 
+import styled from "styled-components";
 function Signup() {
     const [mail, setMail]= useState('');
     const [password, setPassword]= useState('');
     const [uname, setUname]= useState('');
-    
-    const [loggedInState,setLoggedInState]=useState();
     const history = useHistory();
-
+    const [{isLoading}] = useStateValue();
     const [,dispatch]= useStateValue();
     
     const signInWithGoogle = () => {     
@@ -32,20 +33,37 @@ function Signup() {
   };
 
     const signUp=(event)=>{
+       
         event.preventDefault(); 
-        setLoggedInState("login"); 
+        dispatch({
+              type:'SET_LOADING',
+              isLoading:true
+            })
+    
         auth.createUserWithEmailAndPassword(mail, password)
         .then((authUser)=>{
         return authUser.user.updateProfile({
             displayName : uname
-        })}).then(auth=>{history.push("/")})
-        .catch((error)=> alert(error.message));  
+        })}).then(()=>dispatch({
+          type:"SET_LOADING",
+          isLoading:false
+        }))
+        .then(()=>{history.push("/")})
+        .catch((error)=>alert(error.message)).then(()=>dispatch({
+          type:"SET_LOADING",
+          isLoading:false
+        }));  
     };
 
     return (
       <div className='loghead'>
         {
-          loggedInState === "login" ?  <h1>Hi</h1>
+          isLoading ?
+          <Load>
+            <Space>
+              <Spin size="large" />
+            </Space>
+          </Load> 
           :
           <div className='signUp'>
             <div>
@@ -111,3 +129,8 @@ function Signup() {
 }
 
 export default Signup;
+const Load = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 39em;`;

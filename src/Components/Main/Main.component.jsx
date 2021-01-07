@@ -8,7 +8,7 @@ import Player from '../Player/Player.component';
 
 function Main() {
   const [{isLoading,search,user}]=useStateValue();
-    const [,dispatch]=useStateValue();
+  const [,dispatch]=useStateValue();
     
   useEffect(()=>{
     const apiClient= create({
@@ -21,6 +21,7 @@ function Main() {
     }))
     .catch((e)=>console.log(e));
   },[dispatch,user?.uid]);
+  
     return (
     <Maindiv>    
       {

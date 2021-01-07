@@ -3,14 +3,11 @@ import styled from "styled-components";
 import Player from '../../Components/Player/Player.component';
 import {useStateValue} from '../../StateProvider';
 import Card2 from '../../Components/Cardfav/Card2.component';
-
-import { useHistory } from "react-router-dom";
 import {db} from '../../firebase';
 function Fav() {
     
     const [fav,setFav] =useState();
     const [{user,isSign}]= useStateValue();
-    const history= useHistory();
 
     useEffect(()=>{
         db.collection('users').doc(user?.uid).collection('fav')
@@ -22,29 +19,26 @@ function Fav() {
             }
           ))
      ));
-        
     },[user?.uid]);
     
     return (
         <Content>
-            
             <Cent>
                <b><i> Favourite Page</i></b>
             </Cent>
             <FavMain>
             {
                 isSign ? 
-
-                fav?.map((d1,index)=>(
-                    <Card2 key={index} data={d1}/>
-                )) 
-                : history.push('./Signin')
-            }
-                 
+                    fav?.length > 0 ?
+                        fav?.map((d1,index)=>(
+                            <Card2 key={index} data={d1}/>
+                        )) 
+                        :<Load><b><i>Favoutite is Empty</i></b></Load>
+                :alert("Please LogIn to use this feature.")
+            }     
             <Player/>
         </FavMain>  
         </Content>
-        
     )
 }
 
@@ -52,15 +46,25 @@ export default Fav;
 const Content = styled.div`
     display:flex;
     flex-direction:column;
+    background-color: aliceblue;
 `;
+
 const FavMain = styled.div`
     display:flex;
     flex-flow: wrap;
     justify-content: center;
-    padding: 1em; 
-    background-color: aliceblue;`;
+     
+`;
 
 const Cent = styled.div`
+    padding:1em;
     display:flex;
     justify-content:center;
-    background-color: aliceblue;`;
+    background-color: aliceblue;
+    border-bottom:0.1px solid darkgrey`;
+
+const Load = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 39em;`;

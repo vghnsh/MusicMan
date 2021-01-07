@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import {auth} from '../../firebase';
 import firebase from 'firebase';
 import './Signup.style.scss';
+import {useStateValue} from '../../StateProvider';
 
 function Signup() {
     const [mail, setMail]= useState('');
@@ -13,15 +14,22 @@ function Signup() {
     const [loggedInState,setLoggedInState]=useState();
     const history = useHistory();
 
-    const signInWithGoogle = () => {
-        const provider =new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({propmt:'select_account'});
-        auth.signInWithPopup(provider)
-          .then(() => {
-            history.push("/");
-          });
-          
-      };
+    const [,dispatch]= useStateValue();
+    
+    const signInWithGoogle = () => {     
+      const provider =new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({propmt:'select_account'});
+      auth.signInWithPopup(provider)
+      .then(()=>dispatch({
+        type:"SET_LOADING",
+        isLoading:false
+      }))
+      .then(()=>{history.push("/")})
+      .catch((error)=>alert(error.message)).then(()=>dispatch({
+        type:"SET_LOADING",
+        isLoading:false
+      }));     
+  };
 
     const signUp=(event)=>{
         event.preventDefault(); 

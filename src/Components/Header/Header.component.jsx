@@ -19,9 +19,7 @@ function Header() {
     }
     else{
       alert('Please LogIn to use this feature');
-    }
-    
-    
+    } 
   }
 
   const signOut=(event)=>{
@@ -36,7 +34,6 @@ function Header() {
               <Link style={{color:'black'}} to='/'>
               <b>Music Man</b>
               </Link>
-            
             </Logo>
             {
               isSign ? 
@@ -47,14 +44,13 @@ function Header() {
               </Navb>
               :
               <Navb>
-                <NavItem><Link onClick={handle}>Your Favorite</Link></NavItem>
+                <NavItem onClick={handle}>Your Favorite</NavItem>
                 <NavItem><Button><Link to='/Signin'>LogIn</Link></Button></NavItem>
                 <NavItem><Button danger><Link to='/Signup'>SignUp</Link></Button></NavItem>
               </Navb>
             }
 
             <Link to='/fav'>
-
             </Link>
             <Link to='/SignIn'>
 

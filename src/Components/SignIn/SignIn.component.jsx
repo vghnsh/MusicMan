@@ -20,9 +20,16 @@ function Signin() {
         const provider =new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({propmt:'select_account'});
         auth.signInWithPopup(provider)
-          .then(() => {
-            history.push("/");
-          });  
+        .then(()=>dispatch({
+          type:"SET_LOADING",
+          isLoading:false
+        }))
+        .then(()=>{history.push("/")})
+        .catch((error)=>alert(error.message)).then(()=>dispatch({
+          type:"SET_LOADING",
+          isLoading:false
+        }));
+          
     };
     const signIn=(event)=>{
       event.preventDefault(); 

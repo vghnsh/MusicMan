@@ -3,6 +3,7 @@ import dateFormat from 'dateformat';
 import {Card,Button} from 'antd';
 import {useStateValue} from '../../StateProvider';
 
+import {DeleteOutlined} from '@ant-design/icons';
 import {db} from '../../firebase';
 import styled from "styled-components";
 
@@ -23,8 +24,7 @@ function Card2({data}) {
       type:"REMOVE_TRACK_ID",
       trackId: data.favItem.trackId
     })
-    db.collection('users').doc(user?.uid).collection('fav').doc(data.id).delete();
-    
+    db.collection('users').doc(user?.uid).collection('fav').doc(data.id).delete(); 
   }
   return (
       <Card 
@@ -33,8 +33,8 @@ function Card2({data}) {
         cover={<img alt="example" src={data.favItem.imageUrl}/>}
         >
         <Cent>
-        <Button onClick={setCurrentMusic} >Play</Button>
-        <Button onClick={removeFromFav} danger>Remove Fav</Button>
+          <Button onClick={setCurrentMusic} >Play</Button>
+          <DeleteOutlined style={{fontSize:'1.5em'}}  onClick={removeFromFav }/>
         </Cent>
         <Meta title={data.favItem.title} description={dateFormat(data.favItem.date, "mmmm dS, yyyy")}/>
       </Card>

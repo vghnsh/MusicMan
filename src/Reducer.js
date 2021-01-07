@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 export const initialState = {
     search:null,
     currentMusic: null,
@@ -12,9 +14,7 @@ export const initialState = {
 };
 
 function reducer(state,action){    
-    //console.log(action);
     switch(action.type){
-
         case "SET_SEARCH":
             return{
                 ...state,
@@ -53,10 +53,9 @@ function reducer(state,action){
         
         case "REMOVE_TRACK_ID":
             let newCart = state.trackId;
-            const index = state.trackId.includes(action.trackId)
-
-            if(index){
-                newCart.splice(index,1);
+            var rm = _.without(state.trackId,action.trackId)
+            if(rm.length >= 0 ){
+                newCart.splice( 0,newCart.length, ...rm);
             }else{
                 console.warn(`cant remove:${action.trackId}`);
             }
@@ -71,10 +70,10 @@ function reducer(state,action){
             }
 
         case "SET_CURRENT_USER":
-                return{
-                    ...state,
-                    user:action.user,
-                    isSign:action.isSign
+            return{
+                ...state,
+                user:action.user,
+                isSign:action.isSign
             };
           
         default:

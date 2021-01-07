@@ -29,10 +29,6 @@ function Card1({data}) {
         trackId:data.trackId,
         currentMusic:data
       })
-      dispatch({
-            type:"SET_TRACKID",
-            trackId:data.trackId
-      })
     }
     else{
       alert('Please logIn to use that feature')
@@ -50,16 +46,12 @@ function Card1({data}) {
         
         {isSign ? 
             trackId.includes(data.trackId) ?
-            <HeartFilled />
+            <HeartFilled style={{fontSize:'1.5em'}}/>
             :
-            <HeartOutlined onClick={addToFav}/>
+            <HeartOutlined style={{fontSize:'1.5em'}} onClick={addToFav}/>
             :
-            <HeartOutlined onClick={addToFav}/>
+            <HeartOutlined style={{fontSize:'1.5em'}} onClick={addToFav}/>
         }
-        
-          
-          
-        
         </Cent>
         <Meta title={data.collectionName} description={dateFormat(data.releaseDate, "mmmm dS, yyyy")}/>
       </Card>

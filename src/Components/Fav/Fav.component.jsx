@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from 'react';
 import styled from "styled-components";
-import Player from '../../Components/Player/Player.component';
 import {useStateValue} from '../../StateProvider';
 import Card2 from '../../Components/Cardfav/Card2.component';
 import {db} from '../../firebase';
@@ -36,8 +35,7 @@ function Fav() {
                         :<Load><b><i>Favoutite is Empty</i></b></Load>
                 :alert("Please LogIn to use this feature.")
             }     
-            <Player/>
-        </FavMain>  
+            </FavMain>  
         </Content>
     )
 }
@@ -53,6 +51,7 @@ const FavMain = styled.div`
     display:flex;
     flex-flow: wrap;
     justify-content: center;
+    padding: 1em;
      
 `;
 

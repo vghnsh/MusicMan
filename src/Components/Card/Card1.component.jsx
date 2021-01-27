@@ -12,10 +12,6 @@ function Card1({data}) {
 
   const setCurrentMusic=()=>{
     dispatch({
-      type:"ADD_TO_FAV",
-      fav:data
-    })
-    dispatch({
         type:"SET_CURRENT_MUSIC",
         currentMusic:data
     })

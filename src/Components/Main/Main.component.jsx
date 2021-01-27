@@ -2,9 +2,9 @@ import React ,{useEffect} from 'react';
 import {Spin,Space} from 'antd';
 import {create} from 'apisauce';
 import styled from "styled-components";
+import Sidebar from '../Sidebar/Sidebar.component';
 import {useStateValue} from '../../StateProvider';
 import Card1 from '../Card/Card1.component';
-import Player from '../Player/Player.component';
 
 function Main() {
   const [{isLoading,search,user}]=useStateValue();
@@ -32,27 +32,21 @@ function Main() {
           </Space>
         </Load>  
         :
-        <div>
+        <Background>
+          <Sidebar/>
           <Row>
           {
             search?.data?.results?.filter((d1)=> d1.kind === 'song').map((d1,index)=>(
               <Card1 key={index} data={d1}/>
             ))    
           } 
-          </Row> 
-        <Player/> 
-        </div>
+          </Row>
+        </Background>
       }
     </Maindiv>
     )
 }
 export default Main;
-
-const Row = styled.div`
-  display: flex;
-  flex-flow: wrap;
-  justify-content: center;
-  padding: 1em;`;
 
 const Maindiv = styled.div`
   display: flex;
@@ -60,6 +54,18 @@ const Maindiv = styled.div`
   text-align: center;
   flex-direction: column;
   background-color: aliceblue;`;
+
+const Background=styled.span`
+ display:flex;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  padding: 1em;
+  padding-left:11em;
+ `;
 
 const Load = styled.div`
   display: flex;

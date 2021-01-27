@@ -9,6 +9,7 @@ function Search() {
     
     const [input,setInput]= useState();
     const [,dispatch] = useStateValue();
+    
     function press(){
         dispatch({
             type:'SET_CURRENT_MUSIC',
@@ -40,11 +41,11 @@ function Search() {
           ))
           .catch((e)=>console.log(e)); 
           setInput('');
-    }
+      }
       const handleClick = (e)=>{
         press();
       };
-    
+        
       const handlePress=(e)=>{
         if(e.keyCode===13 || e.which === 13){
             press();
@@ -59,8 +60,8 @@ function Search() {
             allowClear
             size="large"
             value={input}
-            onChange={(e)=>setInput(e.target.value)}
             onKeyDown={handlePress}
+            onChange={(e)=>setInput(e.target.value)}
             />
           </InputF>
           <Button  style={{height:'2.8em'}}  onClick={handleClick} type="primary">Search</Button> 
@@ -68,9 +69,15 @@ function Search() {
     )
 }
 export default Search;
+
 const SearchF = styled.div`
+  position:sticky;
+  top:4.7em;
+  z-index:1;
   display: flex;
   justify-content: center;
+  margin-top:2.5em;
+  padding-bottom:3.3em;
   background-color: aliceblue;`;
 
 const InputF = styled.div`

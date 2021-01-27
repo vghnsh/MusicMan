@@ -168,8 +168,7 @@ const PlayerMain = styled.div`
   @media screen and (max-width: 800px){
     display:flex;
     flex-direction:column;
-  }
-`;
+  }`;
 
 const Row = styled.div`
   display: flex; 

@@ -9,12 +9,11 @@ export const initialState = {
     isLoading:false,
     user:null,
     isSign:false,
-    fav:null,
     trackId:[]
 };
 
 function reducer(state,action){ 
-    console.log(action);   
+      
     switch(action.type){
         case "SET_SEARCH":
             return{
@@ -63,12 +62,6 @@ function reducer(state,action){
             return {
                 ...state
             };
-
-        case "ADD_TO_FAV":
-            return{
-                ...state,
-                fav:action.fav
-            }
 
         case "SET_CURRENT_USER":
             return{

@@ -8,20 +8,9 @@ import {Button } from 'antd';
 
 import {auth} from '../../firebase';
 function Header() {
-  const [,dispatch]= useStateValue();
   const [{user,isSign}]=useStateValue();
   const history = useHistory();
-
-  const handle=()=>{
-    if(isSign){
-      dispatch({type:"SET_CURRENT_MUSIC",currentMusic:null})
-      dispatch({type:'SET_CURRENT_STATE',music:null})
-    }
-    else{
-      alert('Please LogIn to use this feature');
-    } 
-  }
-
+  
   const signOut=(event)=>{
     event.preventDefault();
     auth.signOut();
@@ -29,7 +18,6 @@ function Header() {
   };
     return (
         <Head>
-
             <Logo >
               <Link style={{color:'black'}} to='/'>
               <b>Music Man</b>
@@ -39,12 +27,12 @@ function Header() {
               isSign ? 
               <Navb>
                 <NavItem>{user?.displayName}</NavItem>
-                <NavItem><Link to='/fav' onClick={handle} >Your Favorite</Link></NavItem>
+                <NavItem><Link to='/fav' >Your Favorite</Link></NavItem>
                 <NavItem><Button onClick={signOut} type="primary" danger>Logout</Button></NavItem>
               </Navb>
               :
               <Navb>
-                <NavItem onClick={handle}>Your Favorite</NavItem>
+                <NavItem onClick={()=>alert('Please LogIn to use this feature')}>Your Favorite</NavItem>
                 <NavItem><Button><Link to='/Signin'>LogIn</Link></Button></NavItem>
                 <NavItem><Button danger><Link to='/Signup'>SignUp</Link></Button></NavItem>
               </Navb>
@@ -61,10 +49,14 @@ function Header() {
     )
 }
 export default Header;
+
 const Head = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  position:fixed;
+  top:0;
+  z-index:1;
   font-family: 'Bree Serif', serif;
   background-color: aliceblue;
   @media screen and (max-width: 800px){

@@ -8,6 +8,7 @@ import Signup from './Components/SignUp/SignUp.component';
 import Header from './Components/Header/Header.component';
 import Search from './Components/Search/Search.component';
 import Main from './Components/Main/Main.component';
+import Player from './Components/Player/Player.component';
 import {useStateValue} from './StateProvider';
 
 import {auth} from './firebase';
@@ -18,7 +19,6 @@ function App() {
   const [,dispatch] = useStateValue();
   const [{user}]=useStateValue();
   
-
   useEffect(()=>{
     const unsubsribe= auth.onAuthStateChanged((authUser)=>{
       if(authUser){ 
@@ -70,10 +70,12 @@ function App() {
         <Route path="/">
           <Header/>
           <Search/>
+         
           <Main/>
         </Route>
       </Switch>
     </Router>
+    <Player/> 
     </div>
     
   );

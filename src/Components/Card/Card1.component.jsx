@@ -5,6 +5,9 @@ import {useStateValue} from '../../StateProvider';
 import styled from "styled-components";
 import {HeartFilled,HeartOutlined} from '@ant-design/icons';
 import {db} from '../../firebase';
+import './Card1.css';
+
+
 function Card1({data}) {
   const { Meta } = Card;
   const [,dispatch] = useStateValue();
@@ -41,7 +44,7 @@ function Card1({data}) {
   return (
       <Card 
         hoverable
-        style={{ width: 240 ,padding:'1.5em',margin:'1em'}}
+        className='Response'
         cover={<img alt="example" src={data.artworkUrl100}/>}
         >
         <Cent>
@@ -65,3 +68,4 @@ const Cent= styled.div`
   display:flex;
   justify-content:space-between;
   padding:0.5em`;
+

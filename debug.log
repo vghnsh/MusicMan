@@ -25,3 +25,4 @@
 [0106/030641.912:ERROR:exception_snapshot_win.cc(99)] thread ID 15384 not found in process
 [0106/030641.912:ERROR:exception_snapshot_win.cc(99)] thread ID 13780 not found in process
 [0106/030641.912:ERROR:exception_snapshot_win.cc(99)] thread ID 7212 not found in process
+[0127/222318.083:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

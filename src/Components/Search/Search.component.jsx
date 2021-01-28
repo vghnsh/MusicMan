@@ -76,9 +76,13 @@ const SearchF = styled.div`
   z-index:1;
   display: flex;
   justify-content: center;
-  margin-top:2.5em;
-  padding-bottom:3.3em;
-  background-color: aliceblue;`;
+  margin-top: 4.5em;
+  padding-bottom: 2.3em;
+  background-color: aliceblue;
+  @media screen and (max-width: 800px){
+    top:6.7em;
+  }`
+  ;
 
 const InputF = styled.div`
   width: 45%;`;

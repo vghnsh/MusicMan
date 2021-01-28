@@ -1,15 +1,10 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import styled from "styled-components";
-
 import {create} from 'apisauce';
-
 import {useStateValue} from '../../StateProvider';
-
-
-
 function Sidebar() {
     const [,dispatch]=useStateValue();
-    const chill="chill";
+   // const chill="chill";
     const dance="dance";
     const hiphop="hiphop";
    
@@ -36,22 +31,15 @@ function Sidebar() {
           ))
           .catch((e)=>console.log(e)); 
     }
-   
-
     return (
         <Sidebar1>
-            <ul style={{listStyleType:'none'}}>
-               <li>
-                    <button onClick={()=>call(chill)}>Chill</button>
-                </li>
-                <li>
-                    <button onClick={()=>call(dance)}>Dance</button>
-                </li>
-                <li>
-                    <button onClick={()=>call(hiphop)}>Hiphop</button>
-                </li>
-               <Listitem>EDM</Listitem>
-               <Listitem>Pop</Listitem>
+            <ul style={{listStyleType:'none',padding:'0.2em'}}>
+                <ListitemHead><b><i>Genres</i></b> </ListitemHead>
+                <Listitem onClick={()=>call('chill')}>Chill</Listitem>
+                <Listitem onClick={()=>call('jazz')}>Jazz</Listitem>
+                <Listitem onClick={()=>call('hip hop')}>Hip-hop</Listitem>
+                <Listitem onClick={()=>call('classical')}>Classical</Listitem>
+                <Listitem onClick={()=>call('pop')}>Pop</Listitem>
             </ul> 
         </Sidebar1>
     )
@@ -70,11 +58,21 @@ const Sidebar1 = styled.div`
 `;
 
 const Listitem = styled.li`
-cursor:poi
+
+cursor:pointer;
 padding:0.3em;
     &:hover{
         border:0.1px solid grey;
         border-radius:8%;
         background-color:#80808075;
     }
+    @media screen and (max-width:800px){
+        padding: 0.5em;
+        font-size: 1.1rem;
+    } 
+`;
+
+const ListitemHead = styled.li`
+    font-weight:bold;
+    color:grey;
 `;

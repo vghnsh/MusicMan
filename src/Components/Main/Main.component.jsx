@@ -23,7 +23,10 @@ function Main() {
   },[dispatch,user?.uid]);
   
     return (
-    <Maindiv>    
+    <Maindiv>  
+      <Background>
+        <Sidebar/>
+      </Background>  
       {
         isLoading ?
         <Load>
@@ -32,8 +35,7 @@ function Main() {
           </Space>
         </Load>  
         :
-        <Background>
-          <Sidebar/>
+        
           <Row>
           {
             search?.data?.results?.filter((d1)=> d1.kind === 'song').map((d1,index)=>(
@@ -41,7 +43,7 @@ function Main() {
             ))    
           } 
           </Row>
-        </Background>
+        
       }
     </Maindiv>
     )
@@ -55,7 +57,7 @@ const Maindiv = styled.div`
   flex-direction: column;
   background-color: aliceblue;`;
 
-const Background=styled.span`
+const Background=styled.div`
  display:flex;
 `;
 
@@ -65,6 +67,9 @@ const Row = styled.div`
   justify-content: center;
   padding: 1em;
   padding-left:11em;
+  @media screen and (max-width:800px){
+    padding-left:9em;
+  }
  `;
 
 const Load = styled.div`

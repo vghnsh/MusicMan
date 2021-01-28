@@ -4,9 +4,6 @@ import {create} from 'apisauce';
 import {useStateValue} from '../../StateProvider';
 function Sidebar() {
     const [,dispatch]=useStateValue();
-   // const chill="chill";
-    const dance="dance";
-    const hiphop="hiphop";
    
     const call=(api)=>{
         dispatch({

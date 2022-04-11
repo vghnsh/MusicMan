@@ -1,88 +1,91 @@
-import React,{useState} from 'react';
-import {useStateValue} from '../../StateProvider';
+import React, { useState } from "react";
+import { useStateValue } from "../../StateProvider";
 
-import {Button, Input } from 'antd';
-import {create} from 'apisauce';
+import { Button, Input } from "antd";
+import { create } from "apisauce";
 import styled from "styled-components";
 
 function Search() {
-    
-    const [input,setInput]= useState();
-    const [,dispatch] = useStateValue();
-    
-    function press(){
-        dispatch({
-            type:'SET_CURRENT_MUSIC',
-            currentMusic:null
-          })
-          dispatch({
-            type:'SET_MUSIC_STATE',
-            music:'stop'
-          })
-          dispatch({
-            type:'SET_LOADING',
-            isLoading:true
-          })
-          const apiClient= create({
-            baseURL:'https://itunes.apple.com/search?term=',
-          });
-          apiClient.get(`${input}`)
-          .then((sdata)=>(
-            dispatch({
-                type:'SET_SEARCH',
-                search:sdata
-            })
-          ))
-          .then(()=>(
-            dispatch({
-              type:'SET_LOADING',
-              isLoading:false
-            })
-          ))
-          .catch((e)=>console.log(e)); 
-          setInput('');
-      }
-      const handleClick = (e)=>{
-        press();
-      };
-        
-      const handlePress=(e)=>{
-        if(e.keyCode===13 || e.which === 13){
-            press();
-        }
-      };
+  const [input, setInput] = useState();
+  const [, dispatch] = useStateValue();
 
-    return (
-        <SearchF>
-          <InputF>
-            <Input
-            placeholder="Search Your artist"
-            allowClear
-            size="large"
-            value={input}
-            onKeyDown={handlePress}
-            onChange={(e)=>setInput(e.target.value)}
-            />
-          </InputF>
-          <Button  style={{height:'2.8em'}}  onClick={handleClick} type="primary">Search</Button> 
-        </SearchF>
-    )
+  function press() {
+    dispatch({
+      type: "SET_CURRENT_MUSIC",
+      currentMusic: null,
+    });
+    dispatch({
+      type: "SET_MUSIC_STATE",
+      music: "stop",
+    });
+    dispatch({
+      type: "SET_LOADING",
+      isLoading: true,
+    });
+    const apiClient = create({
+      baseURL:
+        "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?term=",
+    });
+    apiClient
+      .get(`${input}`)
+      .then((sdata) =>
+        dispatch({
+          type: "SET_SEARCH",
+          search: sdata,
+        })
+      )
+      .then(() =>
+        dispatch({
+          type: "SET_LOADING",
+          isLoading: false,
+        })
+      )
+      .catch((e) => console.log(e));
+    setInput("");
+  }
+  const handleClick = (e) => {
+    press();
+  };
+
+  const handlePress = (e) => {
+    if (e.keyCode === 13 || e.which === 13) {
+      press();
+    }
+  };
+
+  return (
+    <SearchF>
+      <InputF>
+        <Input
+          placeholder="Search Your artist"
+          allowClear
+          size="large"
+          value={input}
+          onKeyDown={handlePress}
+          onChange={(e) => setInput(e.target.value)}
+        />
+      </InputF>
+      <Button style={{ height: "2.8em" }} onClick={handleClick} type="primary">
+        Search
+      </Button>
+    </SearchF>
+  );
 }
 export default Search;
 
 const SearchF = styled.div`
-  position:sticky;
-  top:4.7em;
-  z-index:1;
+  position: sticky;
+  top: 4.7em;
+  z-index: 1;
   display: flex;
   justify-content: center;
   margin-top: 4.5em;
   padding-bottom: 2.3em;
   background-color: aliceblue;
-  @media screen and (max-width: 800px){
-    top:6.7em;
-  }`
-  ;
-
+  @media screen and (max-width: 800px) {
+    top: 6.7em;
+  }
+`;
 const InputF = styled.div`
-  width: 45%;`;
+  width: 45%;
+`;

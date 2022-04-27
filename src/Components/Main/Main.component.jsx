@@ -13,7 +13,7 @@ function Main() {
   useEffect(() => {
     const apiClient = create({
       baseURL:
-        "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?term=music",
+        "https://api.allorigins.win/raw?url=https://itunes.apple.com/search?term=music",
     });
     apiClient
       .get()

@@ -24,7 +24,7 @@ function Search() {
     });
     const apiClient = create({
       baseURL:
-        "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?term=",
+        "https://api.allorigins.win/raw?url=https://itunes.apple.com/search?term=",
     });
     apiClient
       .get(`${input}`)

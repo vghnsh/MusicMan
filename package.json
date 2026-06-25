@@ -34,7 +34,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://itunes.apple.com",
   "browserslist": {
     "production": [
       ">0.2%",

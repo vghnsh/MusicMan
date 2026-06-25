@@ -10,9 +10,9 @@ function Main() {
   const [, dispatch] = useStateValue();
 
   useEffect(() => {
-    const apiClient = create({ baseURL: "/" });
+    const apiClient = create({ baseURL: "https://itunes.apple.com" });
     apiClient
-      .get("search", { term: "music", media: "music", entity: "song" })
+      .get("/search", { term: "music", media: "music", entity: "song" })
       .then((sdata) => dispatch({ type: "SET_SEARCH", search: sdata }))
       .catch((e) => console.log(e));
   }, [dispatch, user?.uid]);

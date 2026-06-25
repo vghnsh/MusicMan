@@ -18,9 +18,9 @@ function Sidebar() {
   const call = (genre) => {
     setActive(genre);
     dispatch({ type: "SET_LOADING", isLoading: true });
-    const apiClient = create({ baseURL: "/" });
+    const apiClient = create({ baseURL: "https://itunes.apple.com" });
     apiClient
-      .get("search", { term: genre, media: "music", entity: "song" })
+      .get("/search", { term: genre, media: "music", entity: "song" })
       .then((sdata) => dispatch({ type: "SET_SEARCH", search: sdata }))
       .then(() => dispatch({ type: "SET_LOADING", isLoading: false }))
       .catch((e) => console.log(e));

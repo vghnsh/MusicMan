@@ -1,79 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { create } from "apisauce";
 import { useStateValue } from "../../StateProvider";
+
+const genres = [
+  { label: "Chill", key: "chill", emoji: "🌊" },
+  { label: "Jazz", key: "jazz", emoji: "🎷" },
+  { label: "EDM", key: "edm", emoji: "⚡" },
+  { label: "Classical", key: "classical", emoji: "🎻" },
+  { label: "Pop", key: "pop", emoji: "🌟" },
+];
+
 function Sidebar() {
   const [, dispatch] = useStateValue();
+  const [active, setActive] = useState(null);
 
-  const call = (api) => {
-    dispatch({
-      type: "SET_LOADING",
-      isLoading: true,
-    });
-    const apiClient = create({
-      baseURL:
-        "https://api.allorigins.win/raw?url=https://itunes.apple.com/search?term=",
-    });
+  const call = (genre) => {
+    setActive(genre);
+    dispatch({ type: "SET_LOADING", isLoading: true });
+    const apiClient = create({ baseURL: "/" });
     apiClient
-      .get(`${api}`)
-      .then((sdata) =>
-        dispatch({
-          type: "SET_SEARCH",
-          search: sdata,
-        })
-      )
-      .then(() =>
-        dispatch({
-          type: "SET_LOADING",
-          isLoading: false,
-        })
-      )
+      .get("search", { term: genre, media: "music", entity: "song" })
+      .then((sdata) => dispatch({ type: "SET_SEARCH", search: sdata }))
+      .then(() => dispatch({ type: "SET_LOADING", isLoading: false }))
       .catch((e) => console.log(e));
   };
+
   return (
-    <Sidebar1>
-      <ul style={{ listStyleType: "none", padding: "0.2em" }}>
-        <ListitemHead>
-          <b>
-            <i>Genres</i>
-          </b>
-        </ListitemHead>
-        <Listitem onClick={() => call("chill")}>Chill</Listitem>
-        <Listitem onClick={() => call("jazz")}>Jazz</Listitem>
-        <Listitem onClick={() => call("edm")}>EDM</Listitem>
-        <Listitem onClick={() => call("classical")}>Classical</Listitem>
-        <Listitem onClick={() => call("pop")}>Pop</Listitem>
-      </ul>
-    </Sidebar1>
+    <SidebarWrap>
+      <SectionLabel>Genres</SectionLabel>
+      {genres.map((g) => (
+        <GenreItem key={g.key} active={active === g.key} onClick={() => call(g.key)}>
+          <Emoji>{g.emoji}</Emoji>
+          <span>{g.label}</span>
+        </GenreItem>
+      ))}
+    </SidebarWrap>
   );
 }
 
 export default Sidebar;
-const Sidebar1 = styled.div`
-  display: flex;
-  flex-direction: column;
+
+const SidebarWrap = styled.div`
   position: fixed;
-  top: 7em;
-  text-align: left;
-  font-size: 2em;
-  font-family: "Roboto Slab", serif;
+  top: 60px;
+  left: 0;
+  width: 190px;
+  height: calc(100vh - 60px - 90px);
+  background: #eeedf5;
+  padding: 1.25rem 0.75rem;
+  border-right: 1px solid #e8e6f4;
+  overflow-y: auto;
 `;
 
-const Listitem = styled.li`
+const SectionLabel = styled.div`
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  padding: 0 0.5rem;
+  margin-bottom: 0.6rem;
+`;
+
+const GenreItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 0.3em;
-  &:hover {
-    border: 0.1px solid grey;
-    border-radius: 8%;
-    background-color: #80808075;
-  }
-  @media screen and (max-width: 800px) {
-    padding: 0.5em;
-    font-size: 1.1rem;
-  }
+  font-size: 0.92rem;
+  font-weight: ${({ active }) => (active ? "700" : "500")};
+  color: ${({ active }) => (active ? "#7c3aed" : "#444")};
+  background: ${({ active }) => (active ? "#ede9fe" : "transparent")};
+  transition: all 0.15s ease;
+  &:hover { background: #f5f3ff; color: #7c3aed; }
 `;
 
-const ListitemHead = styled.li`
-  font-weight: bold;
-  color: grey;
+const Emoji = styled.span`
+  font-size: 1rem;
+  width: 1.4rem;
+  text-align: center;
 `;

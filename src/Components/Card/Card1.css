@@ -1,10 +1,126 @@
-.Response {
-  width: 15rem;
-  padding: 1.5rem;
-  margin: 1rem;
+.music-card {
+  width: 180px;
+  background: #f5f3ff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e8e6f4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0;
 }
+
+.music-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(124, 58, 237, 0.15);
+}
+
+.card-art-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background: #f0eeff;
+  overflow: hidden;
+}
+
+.card-art-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.music-card:hover .card-art-wrap img {
+  transform: scale(1.04);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.music-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.play-btn-big {
+  width: 44px;
+  height: 44px;
+  background: #7c3aed;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.5);
+  transition: transform 0.15s, background 0.15s;
+}
+
+.play-btn-big:hover {
+  transform: scale(1.1);
+  background: #6d28d9;
+}
+
+.card-info {
+  padding: 0.7rem 0.75rem 0.3rem;
+}
+
+.card-title {
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.2rem;
+}
+
+.card-artist {
+  font-size: 0.75rem;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.15rem;
+}
+
+.card-date {
+  font-size: 0.7rem;
+  color: #bbb;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.3rem 0.65rem 0.6rem;
+}
+
+.fav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 1rem;
+  padding: 0.2rem;
+  transition: color 0.15s, transform 0.15s;
+  display: flex;
+}
+
+.fav-btn:hover { color: #f472b6; transform: scale(1.2); }
+.fav-btn.active { color: #f472b6; }
+
 @media screen and (max-width: 800px) {
-  .Response {
-    width: 12rem;
-  }
+  .music-card { width: 150px; }
 }
